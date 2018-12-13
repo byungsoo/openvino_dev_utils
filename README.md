@@ -1,10 +1,11 @@
 # OpenVINO Dev Utils
 
 ## Installation with docker
-###1. Download the installation .tgz file from the website
+### Download the installation .tgz file from the website
+
 https://software.seek.intel.com/openvino-toolkit
 
-###2. Install udev rules on the host machine
+### Install udev rules on the host machine
 
 ```
 sudo cp 97-usbboot.rules /etc/udev/rules.d/
@@ -13,14 +14,14 @@ sudo udevadm trigger
 sudo ldconfig	
 ```
 
-###3. Build the docker image
+### Build the docker image
 
 ```
 docker build -t ncs2_dev .
 ```
 
 
-###4. Run a container from the image
+### Run a container from the image
     
 NOTE: Run the command below at your own risk. Some options can harm the host system.
 ```
@@ -28,12 +29,12 @@ docker run -it --privileged --rm -d --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-
 ```
 
 
-###5. Add X11 connection on the host machine
+### Add X11 connection on the host machine
 ```
 xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $(docker ps -l -q)`
 ```
 
-###6. Run the demo app
+### Run the demo app
 ```
 docker exec -it ncs2_dev /opt/intel/computer_vision_sdk/deployment_tools/demo/demo_security_barrier_camera.sh -d MYRIAD
 ```
